@@ -46,9 +46,12 @@ The real path requires:
 
 1. The local official Fashion-MNIST IDX files from
    [Session 18](../18-images-flat/README.md).
-2. A torchvision binary build compatible with the installed **torch 2.14.1 CPU**,
-   Python 3.12, and the platform. It is optional for this course, not installed by
-   this lesson. Use the official [compatibility table](https://github.com/pytorch/vision#installation);
+2. A torchvision binary build compatible with the installed PyTorch, Python,
+   and platform. The [WSL/Linux vision profile](../../SETUP.md#optional-real-transfer-learning)
+   pins `torch==2.8.0+cpu` with `torchvision==0.23.0+cpu`. The preserved Mac
+   environment has torch 2.14.1 and needs its own matching macOS build, not
+   these Linux wheels. Torchvision is optional, not installed by this lesson.
+   Use the official [compatibility table](https://github.com/pytorch/vision#installation);
    do not guess a version or install an arbitrary latest wheel.
 3. The matching torchvision dependencies, including Pillow and NumPy as required
    by that distribution, supplied through an approved offline process.
@@ -64,10 +67,10 @@ ImageNet training data or pretrained weights. Review the official
 its training-data terms, your dataset rights, and intended use before deployment.
 No weights, ImageNet images, or Fashion-MNIST images are redistributed here.
 
-On this macOS course environment you can inspect a supplied artifact's digest:
+On Linux, WSL, or macOS, inspect a supplied artifact's digest with Python:
 
 ```sh
-shasum -a 256 assets/resnet18-f37072fd.pth
+.venv/bin/python -c "import hashlib; from pathlib import Path; print(hashlib.sha256(Path('assets/resnet18-f37072fd.pth').read_bytes()).hexdigest())"
 ```
 
 After independently establishing its trusted source, set the shell variable

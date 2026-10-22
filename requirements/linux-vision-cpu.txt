@@ -1,0 +1,2 @@
+-r linux-cpu.txt
+torchvision==0.23.0+cpu

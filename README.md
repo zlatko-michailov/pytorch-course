@@ -21,8 +21,8 @@ From this folder, run the first lesson with:
 .venv/bin/python lessons/01-learn-a-line/train.py
 ```
 
-The environment must be created first; see the setup instructions below if
-`.venv/bin/python` does not exist.
+The environment must be created first; see the [WSL/Linux setup guide](SETUP.md)
+or the environment notes below if `.venv/bin/python` does not exist.
 
 ## How the course works
 
@@ -60,23 +60,32 @@ the scaffolding until you can explain the behavior.
 
 ## Environment
 
-The course uses Python 3.12 and CPU execution initially. A GPU, notebook server,
-cloud account, and downloaded dataset are not needed for Project 1.
+The course supports Python 3.12-3.13 and CPU execution on **WSL 2, native Linux,
+and macOS**. A GPU, Apple Silicon, notebook server, or cloud account is not
+required. Real-image lessons need local resources; the core examples do not.
+
+**For a new WSL/Linux installation, follow [SETUP.md](SETUP.md).** It covers
+Ubuntu prerequisites, source transfer without the Mac virtual environment,
+a version-pinned CPU-only pip profile, offline downloads from Windows or Linux,
+optional torchvision, and VS Code in WSL. The lesson commands remain the same.
 
 Python 3.12 is a course environment choice, not a requirement of the first
 lesson. Apple-provided Python 3.9 can also run that lesson with a compatible
 PyTorch release such as 2.8.0.
 
-`pyproject.toml` declares the direct dependency. The generated `uv.lock` records
-the resolved dependency versions. Use `.venv/bin/python` to run the lessons
-without learning an additional package manager.
+`pyproject.toml` declares the supported Python/PyTorch range.
+`requirements/linux-cpu.txt` selects the Linux CPU build, with matching optional
+vision dependencies in `requirements/linux-vision-cpu.txt`. The existing
+`uv.lock` records the original corporate-source environment, not this Linux CPU
+profile. Use `.venv/bin/python` to run the lessons without learning an
+additional package manager.
 
 Do not replace or install packages into macOS's system Python.
 
-**Current setup:** the project-local environment contains Python 3.12.15 and
-PyTorch 2.14.1. On rechecking after the earlier installation attempts were stopped,
-PyTorch was already installed, and `uv.lock` was present. This working installation
-was preserved rather than replaced.
+**Existing Mac setup (preserved):** the project-local environment contains
+Python 3.12.15 and PyTorch 2.14.1. On rechecking after the earlier installation
+attempts were stopped, PyTorch was already installed, and `uv.lock` was present.
+This working installation was preserved rather than replaced.
 
 PyTorch may print a warning that NumPy is unavailable. The torch-only lessons
 do not need NumPy, and their tensor calculations and training still work.
@@ -95,7 +104,8 @@ The transferred bundle is at:
 It contains PyTorch 2.8.0 and its nine dependencies as wheels for Python 3.12 on
 macOS Apple Silicon. All ten wheel archives passed their ZIP checksum checks, and
 an offline dependency-resolution dry run succeeded. No packages were changed by
-those checks.
+those checks. These macOS wheels cannot be used on WSL/Linux; obtain the
+[Linux CPU wheel set](SETUP.md#restricted-networks-and-offline-installation) instead.
 
 Keep the whole folder. It provides an alternative compatible version for the
 first lesson, not an exact restoration of the current PyTorch 2.14.1 environment
@@ -108,11 +118,14 @@ automatically inherit `pip`'s configuration. Changing Python versions does not
 remove a network restriction. Do not bypass corporate network restrictions,
 disable certificate verification, or copy credentials into course files.
 
-Keep `uv.lock` and use `--locked` with future `uv sync` commands when reproducing
-the current dependency versions. The approved package source, compatible local
-artifacts, or an adequate existing cache must also be available. If deliberately
-switching to the older offline bundle, update the dependency record accordingly
-rather than assuming it matches the current lockfile.
+Keep `uv.lock` and use `--locked` with future `uv sync` commands only when
+reproducing the original Mac/corporate-source setup, not the Linux CPU profile.
+The approved package source, compatible local artifacts, or an adequate existing
+cache must also be available. If deliberately switching to the older offline
+bundle, update the dependency record accordingly rather than assuming it matches
+the current lockfile. On WSL/Linux, follow
+the pip requirements in the setup guide and do not run `uv sync` over that
+environment: the existing lock includes unneeded Linux CUDA dependencies.
 
 Activating the virtual environment is optional. Using `.venv/bin/python`
 explicitly selects the interpreter and dependencies for this course.
@@ -121,7 +134,7 @@ explicitly selects the interpreter and dependencies for this course.
 
 Use this folder as the durable course material. A useful continuation message is:
 
-> Continue the course in `/Users/zlatkom/src/pytorch-course`. I am on Project 1,
+> Continue the course in `~/src/pytorch-course`. I am on Project 1,
 > Session 2. Here are my predictions, results, and questions: ...
 
 Your reading and experiments, not the fact that an example has been executed,

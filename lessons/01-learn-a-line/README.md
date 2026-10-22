@@ -166,12 +166,15 @@ print(f"New predictions: {new_predictions.tolist()}")
 Run it from the course folder:
 
 ```sh
-cd /Users/zlatkom/src/pytorch-course
+cd ~/src/pytorch-course
 .venv/bin/python lessons/01-learn-a-line/train.py
 ```
 
-If the environment has not been prepared, follow the [setup instructions](../../README.md#environment)
-first. No environment activation is required with this command.
+Use your actual course location if it differs from `~/src/pytorch-course`.
+If the environment has not been prepared, follow the
+[WSL/Linux setup instructions](../../SETUP.md), or the
+[existing environment notes](../../README.md#environment), first.
+No environment activation is required with this command.
 
 In the current environment, PyTorch may first print a warning that NumPy is not
 installed. This script does not use NumPy; its tensor operations and training

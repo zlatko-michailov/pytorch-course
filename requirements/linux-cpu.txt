@@ -1,0 +1,2 @@
+# Linux x86_64 CPU wheels; installation and approved offline options are in SETUP.md.
+torch==2.8.0+cpu

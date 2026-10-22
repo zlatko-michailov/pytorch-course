@@ -25,7 +25,7 @@ def lesson_folders():
 
 
 def check_sources(folders):
-    documents = [ROOT / "README.md", ROOT / "CURRICULUM.md"]
+    documents = [ROOT / name for name in ("README.md", "CURRICULUM.md", "SETUP.md")]
     sources = []
     for folder in folders:
         for required in ("README.md", "train.py"):
