@@ -1,0 +1,10 @@
+.bootstrap/
+.cache/
+.python/
+.venv/
+__pycache__/
+*.py[cod]
+.DS_Store
+artifacts/
+.artifacts/
+data/

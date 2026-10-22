@@ -1,0 +1,11 @@
+[project]
+name = "pytorch-course"
+version = "0.1.0"
+description = "A cumulative, hands-on introduction to neural networks with PyTorch."
+requires-python = ">=3.12,<3.14"
+dependencies = [
+    "torch>=2.8,<3",
+]
+
+[tool.uv]
+package = false
